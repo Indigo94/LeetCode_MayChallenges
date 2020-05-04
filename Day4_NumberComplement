@@ -1,0 +1,19 @@
+class Solution {
+    public int findComplement(int num) {
+    //placeholder for when the number is being converted to binary
+     String binaryRep = "";
+     //converts the number to binary using a well-known algorithm: divide by 2 and put the remainder in a stack
+		while (num > 0) {
+			binaryRep += String.valueOf(num % 2);
+			num /= 2;
+		}
+		int sum = 0;
+    //If its 0, get whatever the value is. Usually we would do this when it's 1, but the problem wants the inverted value
+		for (int i = 0; i < binaryRep.length(); i++) {
+			if (binaryRep.charAt(i) == '0') {
+				sum += Math.pow(2, i);
+			}
+		}
+		return sum;
+    }
+}
