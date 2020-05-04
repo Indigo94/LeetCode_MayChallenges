@@ -1,0 +1,27 @@
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+		Map<String, Integer> map_one = new HashMap<String, Integer>();
+		int counter = ransomNote.length();
+        		if (counter == 0) {
+			return true;
+		}
+		for (String x : ransomNote.split("")) {
+			if (map_one.containsKey(x)) {
+				map_one.put(x, map_one.get(x) + 1);
+			} else {
+				map_one.put(x, 1);
+			}
+		}
+		for (String y : magazine.split("")) {
+			if (map_one.containsKey(y) && map_one.get(y) > 0) {
+				map_one.put(y, map_one.get(y) - 1);
+				counter--;
+			}
+            	if (counter == 0) {
+				return true;
+			}
+
+		}
+		return false;
+    }
+}
