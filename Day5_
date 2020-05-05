@@ -1,0 +1,27 @@
+public int firstUniqChar(String s) {
+//if string doesnt contain anything
+        if (s.length() == 0)
+        {
+            return -1;
+        }
+        //this map will keep a count of the number of times the variable appears in a string
+        //more importantly, since its linked, it'll maintain insertion order so that we know when the first non-repeating
+        //value occurs
+        		Map<String, Integer> map = new LinkedHashMap<String, Integer>();
+            //adds values to map
+		for (String letter : s.split("")) {
+			if (map.containsKey(letter)) {
+				map.put(letter, map.get(letter) + 1);
+			} else {
+				map.put(letter, 1);
+			}
+		}
+    //first keyset that contains a value of 1, get the index and return it
+		for (Map.Entry<String, Integer> tempMap : map.entrySet()) {
+			if (tempMap.getValue() == 1) {
+				return s.indexOf(tempMap.getKey());
+			}
+		}
+    //return -1 if there arent any non-repeating characters
+		return -1;
+    }
