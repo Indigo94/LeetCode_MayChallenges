@@ -1,0 +1,25 @@
+	public static int majorityElement(int[] nums) {
+  //We are going to take the numbers in the array and count how many times they appear. 
+  //Initializing map for counting numbers
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+    //put numbers into map and count the amount of times they appear
+		for (int num : nums) {
+			if (map.containsKey(num)) {
+				map.put(num, map.get(num) + 1);
+			} else {
+				map.put(num, 1);
+			}
+		}
+    //variables that will hold the key and value of the pair with the highest frequency
+		int key = Integer.MIN_VALUE;
+		int value = Integer.MIN_VALUE;
+    //compare every value in the map with the highest one. If the current map value is higher, replace the values in the variables
+		for (Map.Entry<Integer, Integer> mapSet : map.entrySet()) {
+			if (mapSet.getValue() > value) {
+				key = mapSet.getKey();
+				value = mapSet.getValue();
+			}
+		}
+    //return number with highest frequency
+		return key;
+	}
