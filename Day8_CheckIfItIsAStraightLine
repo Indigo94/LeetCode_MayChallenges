@@ -1,0 +1,21 @@
+public static boolean checkStraightLine(int[][] coordinates) {
+// if theres only one coordinate, Leetcode considers this as true
+		if (coordinates.length == 1) {
+			return true;
+		}
+    //Get the slope of the first two coordinates. This will be our comparison value
+		float slope = (float) (coordinates[1][1] - coordinates[0][1]) / (float) (coordinates[1][0] - coordinates[0][0]);
+    //starting from the 3rd coordinate, get the slope between that coordinate and the one before it.
+    // if it's not equal to our comparison value, return false
+    // If the denominator is zero, return false as slope is undefined.
+		for (int i = 2; i < coordinates.length; i++) {
+			if ((coordinates[i][0] - coordinates[i - 1][0]) == 0) {
+				return false;
+			}
+			if (((coordinates[i][1] - coordinates[i - 1][1]) / (coordinates[i][0] - coordinates[i - 1][0])) != slope) {
+				return false;
+			}
+		}
+    //If the slope is constant accross all coordinates, its a straight line. return true
+		return true;
+	}
