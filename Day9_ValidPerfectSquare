@@ -1,0 +1,36 @@
+class Solution {
+public int digitalRoot(String number) {
+		int value = 0;
+		for (String x : number.split("")) {
+			value += Integer.parseInt(x);
+		}
+		return value;
+	}
+
+	public boolean isPerfectSquare(int num) {
+		if (num == 1) {
+			return true;
+		}
+		int rem = num % 10;
+		if (rem == 2 || rem == 3 || rem == 7 || rem == 8) {
+			return false;
+		}
+		int num2 = Integer.MAX_VALUE;
+		String str_num = Integer.toString(num);
+		while (Integer.toString(num2).length() > 1) {
+			num2 = digitalRoot(str_num);
+			str_num = Integer.toString(num2);
+		}
+		if (num2 == 1 || num2 == 4 || num2 == 7 || num2 == 9) {
+			for (int i = 1; i <= (int) Math.ceil(num / 2); i++) {
+				if (i * i > num) {
+					return false;
+				}
+				if (i * i == num) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+}
