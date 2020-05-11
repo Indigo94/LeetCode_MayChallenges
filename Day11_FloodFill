@@ -1,0 +1,43 @@
+public class Day11 {
+  //this method will take the point that has been passed, and attempts to update the pixels that are above, below, left, and right of it
+	public static void fillFunc(int[][] image, int row, int column, int newColor, int orgColor) {
+  // if the number located to the left of the point is not less than 0 and the number is equal to the original point, update it
+  // similar steps but different directions for the other if statements
+		if (column - 1 >= 0 && image[row][column - 1] == orgColor) {
+			image[row][column - 1] = newColor;
+			fillFunc(image, row, column - 1, newColor, orgColor);
+		}
+		if (column + 1 < image[0].length && image[row][column + 1] == orgColor) {
+			image[row][column + 1] = newColor;
+			fillFunc(image, row, column + 1, newColor, orgColor);
+		}
+		if (row - 1 >= 0 && image[row - 1][column] == orgColor) {
+			image[row - 1][column] = newColor;
+			fillFunc(image, row - 1, column, newColor, orgColor);
+		}
+		if (row + 1 < image.length && image[row + 1][column] == orgColor) {
+			image[row + 1][column] = newColor;
+			fillFunc(image, row + 1, column, newColor, orgColor);
+		}
+	}
+
+	public static int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+  //make a note of what the original color was before we update it
+		int orgColor = image[sr][sc];
+    //to avoid stackoverflow issues, we make all the numbers that we change -1. this could be solved by making a parallel array
+    //that contains all the points the method has traversed through.
+
+		int tempColor = -1;
+    // in case we only want to change the original point
+    image[sr][sc] = newColor;
+		fillFunc(image, sr, sc, tempColor, orgColor);
+		for (int i = 0; i < image.length; i++) {
+			for (int j = 0; j < image[0].length; j++) {
+				if (image[i][j] == -1) {
+					image[i][j] = newColor;
+				}
+			}
+		}
+		return image;
+	}
+  }
