@@ -1,3 +1,4 @@
+//This code is from this excellent explanation: https://medium.com/@saurav.agg19/remove-k-digits-8d5aa221751a
 class Solution {
    		public String removeKdigits(String num, int k) {
             		if (num.length() == k)
