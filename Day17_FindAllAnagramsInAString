@@ -1,0 +1,24 @@
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+		List<Integer> anagramList = new ArrayList<Integer>();
+		int[] charVal = new int[26];
+		for (char c : p.toCharArray()) {
+			charVal[c - 'a']++;
+		}
+		int left = 0, right = 0, counter = p.length();
+		while (right < s.length()) {
+			if (charVal[s.charAt(right++) - 'a']-- >= 1) {
+				counter--;
+			}
+			if (counter == 0) {
+				anagramList.add(left);
+			}
+			if (right - left == p.length() && charVal[s.charAt(left++) - 'a']++ >= 0) {
+				counter++;
+			}
+
+		}
+
+		return anagramList;
+	}
+}
