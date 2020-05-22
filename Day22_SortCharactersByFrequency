@@ -1,0 +1,50 @@
+	//Check out this video for explanation: https://www.youtube.com/watch?v=trFw8IDw2Vg
+  public String frequencySort(String s) {
+		HashMap<Character, Integer> map = new HashMap<>();
+		for (char c : s.toCharArray()) {
+			map.put(c, map.getOrDefault(c, 0) + 1);
+		}
+		PriorityQueue<Character> maxHeap = new PriorityQueue<>((a, b) -> map.get(b) - map.get(a));
+		maxHeap.addAll(map.keySet());
+		StringBuilder result = new StringBuilder();
+		while (!maxHeap.isEmpty()) {
+			char current = maxHeap.remove();
+			for (int i = 0; i < map.get(current); i++) {
+				result.append(current);
+			}
+		}
+		return result.toString();
+	}
+  
+  
+  //This was my original implementation, but Leetcode complained about it taking too much memory:
+  //	public String frequencySort(String s) {
+//		int highestNum = 1;
+//		String fin = "";
+//		Map<String, Integer> map = new HashMap<String, Integer>();
+//		List<Integer> inList = new ArrayList<Integer>();
+//		for (String str : s.split("")) {
+//			if (map.containsKey(str)) {
+//				highestNum += (map.get(str) + 1) > highestNum ? map.get(str) + 1 : 0;
+//				map.put(str, map.get(str) + 1);
+//			} else {
+//				map.put(str, 1);
+//			}
+//		}
+//		for (Map.Entry<String, Integer> entry : map.entrySet()) {
+//			inList.add(entry.getValue());
+//		}
+//		Collections.sort(inList);
+//		for (int num = inList.size() - 1; num >= 0; num--) {
+//			int x = inList.get(num);
+//			for (Map.Entry<String, Integer> entry : map.entrySet()) {
+//				if (entry.getValue() == x) {
+//					for (int i = 0; i < x; i++) {
+//						fin += entry.getKey();
+//					}
+//					entry.setValue(-1);
+//				}
+//			}
+//		}
+//		return fin;
+//	}
